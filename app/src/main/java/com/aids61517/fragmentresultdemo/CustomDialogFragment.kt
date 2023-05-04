@@ -1,5 +1,6 @@
 package com.aids61517.fragmentresultdemo
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -27,6 +28,12 @@ class CustomDialogFragment : DialogFragment() {
     private lateinit var binding: CustomDialogFragmentBinding
 
     private val interaction by Delegates.getInteractionFromParent<Interaction>()
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return super.onCreateDialog(savedInstanceState).apply {
+            setCanceledOnTouchOutside(false)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
