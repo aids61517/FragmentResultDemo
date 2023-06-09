@@ -3,11 +3,22 @@ package com.aids61517.fragmentresultdemo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.aids61517.fragmentresultdemo.delegation.series2.FragmentResult
+import com.aids61517.fragmentresultdemo.delegation.series2.FragmentResultManager
 
 class MainActivity : AppCompatActivity(),
-    CustomDialogFragment.Interaction {
-    companion object {
-        private const val FRAGMENT_TAG_CUSTOM_DIALOG = "FRAGMENT_TAG_CUSTOM_DIALOG"
+    FragmentResult by FragmentResultManager() {
+
+    private val customDialogLauncher = registerDialogFragment(this) {
+        object : CustomDialogFragment.Interaction {
+            override fun onConfirmButtonClicked() {
+                Log.i("MainActivity", "onConfirmButtonClicked")
+            }
+
+            override fun onCancelButtonClicked() {
+                Log.i("MainActivity", "onCancelButtonClicked")
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,16 +26,7 @@ class MainActivity : AppCompatActivity(),
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
-            val dialogFragment = CustomDialogFragment.newInstance()
-            dialogFragment.show(supportFragmentManager, FRAGMENT_TAG_CUSTOM_DIALOG)
+            customDialogLauncher.launch(CustomDialogFragment.newInstance())
         }
-    }
-
-    override fun onConfirmButtonClicked() {
-        Log.i("MainActivity", "onConfirmButtonClicked")
-    }
-
-    override fun onCancelButtonClicked() {
-        Log.i("MainActivity", "onCancelButtonClicked")
     }
 }

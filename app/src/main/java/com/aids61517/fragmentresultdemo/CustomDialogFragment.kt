@@ -1,7 +1,6 @@
 package com.aids61517.fragmentresultdemo
 
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import com.aids61517.fragmentresultdemo.databinding.CustomDialogFragmentBinding
-import com.aids61517.fragmentresultdemo.delegation.series1.getInteractionFromParent
+import com.aids61517.fragmentresultdemo.delegation.series2.getInteractionFromParent
 import kotlin.properties.Delegates
 
 class CustomDialogFragment : DialogFragment() {
